@@ -200,7 +200,8 @@ $(LIBS): $(LIBMIN_OBJS)
 
 $(TARGET_EXE): $(OBJS) $(LIBS)
 ifeq ($(TARGET), host)
-	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LIBS) $(TARGET_LIBS)
+	# TODO: Remove redundant $(LIBS) as it is implicit in $^. Testing for TARGET=host currently.
+	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(TARGET_LIBS)
 else ifeq ($(TARGET), standalone)
 	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LIBS) $(TARGET_LIBS)
 else ifeq ($(TARGET), hashalone-host)
