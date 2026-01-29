@@ -37,6 +37,7 @@ BMARKS = ackermann aes anagram audio-codec avl-tree banner bit-kernels blake2b b
 #OPT_CFLAGS = -O0 -g
 OPT_CFLAGS = -O3 -g
 
+#TODO: Add support for cross compilation -> TARGET_CC = riscv$(XLEN)-linux-gnu-gcc (for instance, to compile for riscv linux)
 ifeq ($(TARGET), host)
 TARGET_CC = gcc
 #TARGET_CC = clang
@@ -194,7 +195,7 @@ build: $(TARGET_EXE)
 %.o: %.c
 	$(TARGET_CC) $(CFLAGS) -I../common/ -I../target/ -o $@ -c $<
 
-../common/libmin.a: $(LIBMIN_OBJS)
+$(LIBS): $(LIBMIN_OBJS)
 	$(TARGET_AR) rcs ../common/libmin.a $(LIBMIN_OBJS)
 
 $(TARGET_EXE): $(OBJS) $(LIBS)
