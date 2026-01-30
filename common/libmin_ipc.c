@@ -1,3 +1,4 @@
+#include "libmin_ipc.h"
 #include "libmin.h"
 #include "libtarg.h"
 

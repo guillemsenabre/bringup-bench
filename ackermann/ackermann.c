@@ -106,6 +106,7 @@ would have a(x,x) + 1 < a(x,m). But this is contradiction when x = m.
 
 
 #include "libmin.h"
+#include "libmin_ipc.h"
 
 #define AMAX 5  /* largest arguments to contemplate. This is waaaaaaaaaay more than sufficient! */
 
