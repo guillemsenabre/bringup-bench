@@ -16,6 +16,7 @@
  */
 
 #include "libmin.h"
+#include "libmin_ipc.h"
 
 /*!
  * @addtogroup machine_learning Machine Learning Algorithms
@@ -377,10 +378,29 @@ void test2()
  */
 int main()
 {
+    static u64 cycles_start, inst_start, time_start, cycles_end, inst_end, time_end;
+    static double ipc;
+
     libmin_srand(42);
+    cycles_start = read_cycles();
+    inst_start = read_inst();
+    time_start = read_time();
+    
+    libmin_printf("Cycles: %llu\n Inst: %llu\n Time: %llu\n", cycles_start, inst_start, time_start);
+    libmin_printf("EXECUTING TEST!!!\n");
     test();
+    cycles_end = read_cycles();
+    inst_end = read_inst();
+    time_end = read_time();
+
+    ipc = ipc_calc(inst_end-inst_start, cycles_end-cycles_start);
+    
     /* test2(); */
 
+    libmin_printf("IPC is: %f\n", ipc);
+    libmin_printf("Time taken: %llu\n", time_end-time_start);
+    
     libmin_success();
+    
     return 0;
 }
