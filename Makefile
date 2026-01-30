@@ -39,10 +39,11 @@ OPT_CFLAGS = -O3 -g
 
 #TODO: Add support for cross compilation -> TARGET_CC = riscv$(XLEN)-linux-gnu-gcc (for instance, to compile for riscv linux)
 ifeq ($(TARGET), host)
-TARGET_CC = gcc
+#TARGET_CC = gcc
+TARGET_CC = riscv64-unknown-linux-gnu-gcc
 #TARGET_CC = clang
 TARGET_AR = ar
-TARGET_CFLAGS = -DTARGET_HOST -DTARGET_PERFHOOKS
+TARGET_CFLAGS = -DTARGET_HOST -DTARGET_PERFHOOKS -march=rv64gc
 TARGET_LIBS =
 TARGET_SIM =
 TARGET_DIFF = diff
@@ -184,7 +185,7 @@ __LIBMIN_SRCS = libmin_abs.c libmin_acos.c libmin_asin.c libmin_atan.c libmin_at
   libmin_scanf.c libmin_sincos.c libmin_sqrt.c libmin_strcat.c libmin_strchr.c libmin_strcmp.c \
   libmin_strcpy.c libmin_strcspn.c libmin_strdup.c libmin_strlen.c libmin_strncat.c libmin_strncmp.c \
   libmin_strncpy.c libmin_strpbrk.c libmin_strrchr.c libmin_strspn.c libmin_strstr.c libmin_strcasestr.c \
-  libmin_strtok.c libmin_strtol.c libmin_success.c libmin_strncasecmp.c
+  libmin_strtok.c libmin_strtol.c libmin_success.c libmin_strncasecmp.c libmin_ipc.c libmin_ipc.h
 LIBMIN_SRCS = $(addprefix ../common/,$(basename $(__LIBMIN_SRCS)))
 LIBMIN_OBJS = $(addprefix ../common/,$(addsuffix .o,$(basename $(__LIBMIN_SRCS))))
 
